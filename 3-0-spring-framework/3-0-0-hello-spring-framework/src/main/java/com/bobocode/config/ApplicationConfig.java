@@ -1,6 +1,10 @@
 package com.bobocode.config;
 
 import com.bobocode.TestDataGenerator;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
  * This class specifies application context configuration. It tells Spring to scan "dao" and "service" packages in order
@@ -10,7 +14,13 @@ import com.bobocode.TestDataGenerator;
  * It also explicitly configures a bean of {@link TestDataGenerator} called "dataGenerator". This beans will be injected
  * into {@link com.bobocode.dao.FakeAccountDao} in order to generate some fake accounts.
  */
+
+@Configuration
+@EnableWebMvc
+@ComponentScan({"com.bobocode.service", "com.bobocode.dao"})
 public class ApplicationConfig {
-    // todo: configure application context according to javadoc by following tests in ApplicationConfigTest
-    // todo: verify final implementation by running ApplicationContextTest
+    @Bean
+    public TestDataGenerator dataGenerator() {
+        return new TestDataGenerator();
+    }
 }
