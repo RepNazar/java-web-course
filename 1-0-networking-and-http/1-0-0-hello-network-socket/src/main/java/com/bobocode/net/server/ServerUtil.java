@@ -1,6 +1,5 @@
 package com.bobocode.net.server;
 
-import com.bobocode.util.ExerciseNotCompletedException;
 import lombok.SneakyThrows;
 
 import java.io.BufferedReader;
@@ -41,7 +40,7 @@ public class ServerUtil {
      */
     @SneakyThrows
     public static ServerSocket createServerSocket(int port) {
-        throw new ExerciseNotCompletedException(); // todo: implement according to javadoc and verify by ServerUtilTest
+        return new ServerSocket(port);
     }
 
     /**
@@ -52,7 +51,7 @@ public class ServerUtil {
      */
     @SneakyThrows
     public static Socket acceptClientSocket(ServerSocket serverSocket) {
-        throw new ExerciseNotCompletedException(); // todo: implement according to javadoc and verify by ServerUtilTest
+        return serverSocket.accept();
     }
 
     /**
@@ -64,9 +63,11 @@ public class ServerUtil {
      * @param socket an accepted socket
      * @return message that was received from the client
      */
+    // Seen
     @SneakyThrows
     public static String readMessageFromSocket(Socket socket) {
-        throw new ExerciseNotCompletedException(); // todo: implement according to javadoc and verify by ServerUtilTest
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        return bufferedReader.readLine();
     }
 
     /**
